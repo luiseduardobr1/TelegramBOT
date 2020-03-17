@@ -12,7 +12,7 @@ updates = bot.get_updates()
 
 user_dic={}
 
-# Site with updates: https://api.telegram.org/bot1103293989:AAGrwpn7YoZVIPiPUXaFxdYWHJX2wMRGvn4/getUpdates
+# Site with updates: https://api.telegram.org/botTOKEN/getUpdates
 
 # Handles all text messages that contains the commands '/start' or '/help'.
 @bot.message_handler(commands=['start'])
@@ -27,7 +27,7 @@ def handle_start(message):
 @bot.message_handler(regexp="\w*bolsonaro\w*|\w*Bolsonaro\w*|\w*Lula\w*|\w*lula\w*")
 def political_posts_remove(message):
     #bot.delete_message(message.chat.id, message.message_id)
-    bot.send_message(message.chat.id, 'Por favor, sem discussıes polÌticas no grupo!')
+    bot.send_message(message.chat.id, 'Por favor, sem discuss√µes pol√≠ticas no grupo!')
     
 # Remove political post's
 @bot.message_handler(regexp="contar \w*")
@@ -36,7 +36,7 @@ def contadora(message):
         frase = message.text
         palavra = re.findall('contar (\w*)', frase)[0]
         print(list(palavra))
-        bot.reply_to(message, "N˙mero de letras: " + str(len(list(palavra))))
+        bot.reply_to(message, "N√∫mero de letras: " + str(len(list(palavra))))
     except:
         pass
 
@@ -105,8 +105,8 @@ def memberid(message):
 # New group member
 @bot.message_handler(func=lambda m: True, content_types=['new_chat_members'])
 def new_member(message):
-    bot.reply_to(message, 'Bem vindo! J· deu o cu hoje ?')
-    print('ol· '+str(message.new_chat_member.username))
+    bot.reply_to(message, 'Bem vindo! J√° deu o cu hoje ?')
+    print('ol√° '+str(message.new_chat_member.username))
     #bot.kick_chat_member(message.chat.id, message.new_chat_member.id, None)
 
 # Removed group member
@@ -117,8 +117,8 @@ def remove_member(message):
     
 
 # Send my curriculum
-#@bot.message_handler(func=lambda msg: msg.text == 'meu curriculo' or msg.text == 'meu currÌculo' or msg.text == 'currÌculo' or msg.text == 'curriculo')
-@bot.message_handler(func=lambda msg: msg.text in ['currÌculo', 'meu currÌculo', 'curriculo','meu curriculo'])
+#@bot.message_handler(func=lambda msg: msg.text == 'meu curriculo' or msg.text == 'meu curr√≠culo' or msg.text == 'curr√≠culo' or msg.text == 'curriculo')
+@bot.message_handler(func=lambda msg: msg.text in ['curr√≠culo', 'meu curr√≠culo', 'curriculo','meu curriculo'])
 def curriculo(message):
     doc = open('curriculo_luiseduardopompeu.pdf', 'rb')
     bot.send_document(message.chat.id, doc)
@@ -127,7 +127,7 @@ def curriculo(message):
 @bot.inline_handler(lambda query: query.query == 'text')
 def query_text(inline_query):
     try:
-        r = types.InlineQueryResultArticle('1', 'Manh„', types.InputTextMessageContent('Bom dia!'))
+        r = types.InlineQueryResultArticle('1', 'Manh√£', types.InputTextMessageContent('Bom dia!'))
         r2 = types.InlineQueryResultArticle('2', 'Tarde', types.InputTextMessageContent('Boa tarde!'))
         r3 = types.InlineQueryResultArticle('3', 'Noite', types.InputTextMessageContent('Boa noite!'))
         bot.answer_inline_query(inline_query.id, [r, r2, r3], cache_time=1)
@@ -153,7 +153,7 @@ def query_photo(inline_query):
 @bot.inline_handler(lambda query: len(query.query) == 0)
 def default_query(inline_query):
     try:
-        r = types.InlineQueryResultArticle('1', 'J· Deram o Cu Hoje', types.InputTextMessageContent('J· Deram o Cu hoje?'))
+        r = types.InlineQueryResultArticle('1', 'J√° Deram o Cu Hoje', types.InputTextMessageContent('J√° Deram o Cu hoje?'))
         bot.answer_inline_query(inline_query.id, [r])
     except Exception as e:
         print(e)
