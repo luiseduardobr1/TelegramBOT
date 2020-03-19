@@ -37,3 +37,9 @@ Após essas etapas, a configuração básica do bot já está concluída. No ent
 
 # Programando o Bot
 Em python, há algumas bibliotecas que permitem ao usuário codificar o bot a partir das instruções disponíveis na [API do telegram](https://core.telegram.org/bots/api). Neste tutorial, decidiu-se utilizar a biblioteca [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) sendo uma das mais simples de implementar e ao mesmo tempo bastante completa. 
+
+Para instalar no Jupyter Notebook basta escrever na célula:
+```
+!pip install pyTelegramBotAPI
+```
+Caso use o *pip* só tirar o ponto de exclamação. 
