@@ -166,3 +166,5 @@ bot.polling()
 É importante ressaltar que todos os manipuladores de mensagens são executados em ordem, então, caso haja algum problema de execução no bot seja melhor alterar a posição das funções no código. 
 
 Um outro exemplo de código funcional consiste em [GroupKickingBot](https://github.com/luiseduardobr1/TelegramBOT/blob/master/GroupKickingBot.py) que é um código bem simples de um bot utilizado para excluir qualquer membro novo em algum grupo no qual o mesmo é colocado como administrador. 
+
+Para mais exemplos, pode-se estudar pelos disponíveis da página da biblioteca utilizada: [examples](https://github.com/eternnoir/pyTelegramBotAPI/tree/master/examples). 
