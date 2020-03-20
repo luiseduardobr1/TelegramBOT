@@ -43,3 +43,48 @@ Para instalar no Jupyter Notebook basta escrever na célula:
 !pip install pyTelegramBotAPI
 ```
 Caso use o *pip* só tirar o ponto de exclamação. 
+
+Inicialmente, comenta-se parte a parte do código para em seguida colocá-lo em funcionamento. 
+
+- Para começar, importa-se a biblioteca e o TOKEN recebido (substituir o valor entre as aspas), como:
+
+```Python
+import telebot
+
+bot = telebot.TeleBot("TOKEN")
+```
+
+- Para o bot reconhecer comandos */start* e */help* é preciso definir um "manipulador de mensagens" como:
+
+```Python
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+	bot.reply_to(message, "Oi Amigo")
+```
+
+Nesse código, ao enviar os comandos definidos o bot responde por meio de uma mensagem "Oi Amigo". 
+
+- Uma outra forma de enviar uma mensagem ao reconhecer comandos consiste em utilizar o **send_message** como descrito em:
+
+```Python
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+	bot.send_message(message.chat.id, 'MITO!')
+```
+Diferentemente do **reply_to**, é preciso enviar o ID do chat em que a mensagem será enviada, sendo no caso *message.chat.id* pela [API](https://core.telegram.org/bots/api).
+
+- O bot também pode reconhecer mensagens escritas e executar alguma ação, para isso utiliza-se uma função lambda no manipulador de mensagens. No exemplo abaixo, para qualquer mensagem enviada ao bot, a função retornará *True* e executará a função *echo_all* que tem como objetivo repetir todas as mensagens enviadas por meio *message.text*:
+
+```Python
+@bot.message_handler(func=lambda m: True)
+def echo_all(message):
+	bot.reply_to(message, message.text)
+```
+- Além do método anterior, pode ser interessante que o bot reconheça quando os usuários enviarem textos específicos. Para o exemplo abaixo, quando enviar as mensagens *Good bot* ou *good bot*, ele enviará um emotion de coração:
+
+```Python
+@bot.message_handler(func=lambda msg: msg.text in ['Good bot', 'good bot'])
+def goodbot(message):
+    coracao=u'\u2764'
+    bot.reply_to(message, coracao)
+```
