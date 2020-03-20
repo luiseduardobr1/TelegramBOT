@@ -15,10 +15,10 @@ updates = bot.get_updates()
 @bot.message_handler(commands=['start','comandos'])
 def handle_start(message):
     bot.reply_to(message, 
-    """Oi, meu nome é MicrosUFC_Bot e, como você deve adivinhar, eu sou um bot.
-Meus principais comandos são:
-    /start ou /comandos - Informações dos comandos disponíveis
-    /report - Reportar para admins
+    """Oi, meu nome Ã© MicrosUFC_Bot e, como vocÃª deve adivinhar, eu sou um bot.
+Meus principais comandos sÃ£o:
+    /start ou /comandos - InformaÃ§Ãµes dos comandos disponÃ­veis
+    /admin - InformaÃ§Ã£o de admins e membros
     """)
     print(message.chat.username)
 
