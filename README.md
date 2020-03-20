@@ -88,3 +88,41 @@ def goodbot(message):
     coracao=u'\u2764'
     bot.reply_to(message, coracao)
 ```
+
+![image](https://user-images.githubusercontent.com/56649205/77130763-f71f7180-6a37-11ea-8f94-b8eb5a1680e4.png)
+
+- É possível utilizar um comando OU uma mensagem específica para executar alguma função como no exemplo:
+
+```Python
+@bot.message_handler(commands=['hello'])
+@bot.message_handler(func=lambda msg: msg.text == 'testando se funciona')
+def send_something(message):
+    bot.reply_to(message, "Funciona sim!")
+```
+
+- Uma outra forma de manipulador de mensagens é por meio de *expressões regulares* (regex). No exemplo abaixo, se o usuário enviar "Contar letras PALAVRA", o bot responderá com o número de letras da expresssão "PALAVRA". Para mais informações: [regex](https://docs.python.org/3/library/re.html).
+
+```Python
+@bot.message_handler(regexp="Contar letras \w*")
+def contadora(message):
+    try:
+        frase = message.text
+        palavra = re.findall('Contar letras (\w*)', frase)[0]
+        print(list(palavra))
+        bot.reply_to(message, "Número de letras: " + str(len(list(palavra))))
+    except:
+        pass
+```
+
+- Uma opção também interessante também consiste em executar uma ação a partir de um tipo de atributo enviado (*content_type*). No exemplo abaixo, o bot reconhece todos os arquivos do tipo documento e áudio enviados e executa a função *handle_docs_audio*. 
+
+```Python
+@bot.message_handler(content_types=['document', 'audio'])
+def handle_docs_audio(message):
+    pass
+```
+
+*content_type* pode ser do tipo: 
+```
+text, audio, document, photo, sticker, video, video_note, voice, location, contact, new_chat_members, left_chat_member, new_chat_title, new_chat_photo, delete_chat_photo, group_chat_created, supergroup_chat_created, channel_chat_created, migrate_to_chat_id, migrate_from_chat_id, pinned_message
+```
