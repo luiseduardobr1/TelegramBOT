@@ -128,3 +128,39 @@ text, audio, document, photo, sticker, video, video_note, voice, location, conta
 left_chat_member, new_chat_title, new_chat_photo, delete_chat_photo, group_chat_created, supergroup_chat_created, 
 channel_chat_created, migrate_to_chat_id, migrate_from_chat_id, pinned_message
 ```
+
+# Executando
+Para iniciar o bot, é preciso que no final do código tenha a linha:
+
+```Python
+bot.polling()
+```
+
+Assim, um código funcional completo (deixando o TOKEN para o usuário inserir) consiste em:
+
+```Python
+import telebot
+
+bot = telebot.TeleBot("TOKEN")
+
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+	bot.reply_to(message, "Howdy, how are you doing?")
+	
+@bot.message_handler(regexp="Contar letras \w*")
+def contadora(message):
+    try:
+        frase = message.text
+        palavra = re.findall('Contar letras (\w*)', frase)[0]
+        print(list(palavra))
+        bot.reply_to(message, "Número de letras: " + str(len(list(palavra))))
+    except:
+        pass
+
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+	bot.reply_to(message, message.text)
+
+bot.polling()
+```
+É importante ressaltar que todos os manipuladores de mensagens são executados em ordem, então, caso haja algum problema de execução no bot seja melhor alterar a posição das funções no código. 
