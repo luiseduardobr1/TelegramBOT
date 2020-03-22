@@ -10,6 +10,7 @@ import requests
 import json
 from datetime import datetime
 from dateutil import tz
+from telebot import util
 
 bot = telebot.TeleBot("TOKEN")
 
@@ -200,29 +201,38 @@ def downmembers(message):
 def total_msgs(message):
     usersID=[]
     usersName=[]
+    username=[]
     combinacao = []
     top=[]
     # txt com todos usuários
     usuarios = open("Usuarios.txt", "r", encoding="latin-1").readlines()
     # remover repetidos
     usuarios_unicos = list(dict.fromkeys(usuarios))
+
     # Dividir em Nome - ID
     for item in usuarios:
         usersID.append(re.search('- (\d*)', item)[1])
         usersName.append(item[:item.find('-')])
+        username.append(re.search('@(\w*)', item)[1])
     # Combinacao é uma lista que contempla Nome-ID
-    combinacao.extend([list(i) for i in zip(usersName, usersID)])
+    combinacao.extend([list(i) for i in zip(usersName, usersID, username)])
     # Criar uma lista com todos usuarios
     correcao=''
+    contagem=0
     for b in collections.Counter(usersID).most_common():
         for a in range(0,len(usersID)):
             #print(str(b[0]) + '-' + str(combinacao[a][1]))
             if str(b[0])==str(combinacao[a][1]) and correcao!=str(b[0]):
-                print(str(combinacao[a][0]) + ' - mensagens: '+ str(b[1]))
+                #print(str(combinacao[a][0]) + ' - mensagens: '+ str(b[1]))
                 correcao=str(b[0])
-                top.append(str(combinacao[a][0]) + ' - mensagens: '+ str(b[1]))
-                
-    bot.reply_to(message,"Número de mensagens por membro: " + str(top))
+                contagem = contagem+1
+                top.append(str(contagem) + ' : ' + str(combinacao[a][0]) + ' (@' + str(combinacao[a][2]) + ') - MSGs: '+ str(b[1]))
+
+    splitted_text = util.split_string('\n'.join(top), 3000)
+    for text in splitted_text:
+        bot.reply_to(message,"Número de mensagens por membro: \n" + text)
+
+
     
 # Handles all text messages that match the regular expression
 @bot.message_handler(commands=['universal'])
