@@ -167,7 +167,7 @@ bot.polling()
 
 Um outro exemplo de código funcional consiste em [GroupKickingBot](https://github.com/luiseduardobr1/TelegramBOT/blob/master/GroupKickingBot.py) que é um código bem simples de um bot utilizado para excluir qualquer membro novo em algum grupo no qual o mesmo é colocado como administrador. 
 
-Para um [grupo de amizade do reddit brasil](https://t.me/joinchat/NLSAqhl4ZdiubHNwUCWwjQ) utiliza-se o bot com código-fonte: [TelegramBOT](https://github.com/luiseduardobr1/TelegramBOT/blob/master/botReddit.py).
+Para um [grupo de amizade do reddit brasil](https://t.me/joinchat/NLSAqhl4ZdiubHNwUCWwjQ) utiliza-se o bot com código-fonte: [botReddit](https://github.com/luiseduardobr1/TelegramBOT/blob/master/botReddit.py).
 
 Para mais exemplos, pode-se estudar pelos disponíveis da página da biblioteca utilizada: [examples](https://github.com/eternnoir/pyTelegramBotAPI/tree/master/examples). 
 
