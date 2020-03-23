@@ -92,9 +92,7 @@ Recuperados: {}
 def corona(message):
     html = requests.get("https://bing.com/covid/data")
     data = html.text
-    soup = BeautifulSoup(data, "html.parser")
-
-    res = json.loads(str(soup)) 
+    res = json.loads(data) 
 
     for item in res['areas']:
         if item['id']=='brazil':
