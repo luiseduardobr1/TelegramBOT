@@ -1,4 +1,4 @@
-# coding: latin-1
+Ôªø# coding: latin-1
 
 import telebot
 from telebot import types
@@ -19,22 +19,23 @@ updates = bot.get_updates()
 user_dic={}
 count=0
 
+
 # Handles all text messages that contains the commands '/start' or '/help'.
 @bot.message_handler(commands=['start','comandos'])
 def handle_start(message):
     bot.reply_to(message, 
-    """Oi, meu nome È J·DeuCu_Bot e, como vocÍ deve adivinhar, eu sou um bot (ent„o sem nudes no privado).
-Meus principais comandos s„o:
-    /start - InformaÁıes dos comandos disponÌveis
+    """Oi, meu nome √© J√°DeuCu_Bot e, como voc√™ deve adivinhar, eu sou um bot (ent√£o sem nudes no privado).
+Meus principais comandos s√£o:
+    /start - Informa√ß√µes dos comandos dispon√≠veis
     /regras - Regras do grupo
-    /top - Top 5 dos usu·rios com mais mensagens
-    /bottom - Top 5 dos usu·rios com menos mensagens :(
-    /admin ou /admins - N˙mero de membros e admins
+    /top - Top 5 dos usu√°rios com mais mensagens
+    /bottom - Top 5 dos usu√°rios com menos mensagens :(
+    /admin ou /admins - N√∫mero de membros e admins
     /report - Avisar sobre mensagens infringindo as regras
     /bomdia /boatarde e /boanoite - mensagem de carinho
-    /corona - Casos de coronavÌrus no Brasil
-    /cornos - Seleciona aleatoriamente trÍs cornos
-    Contar letras PALAVRA - conta o n˙mero de letras de "PALAVRA"
+    /corona - Casos de coronav√≠rus no Brasil
+    /cornos - Seleciona aleatoriamente tr√™s cornos
+    Contar letras PALAVRA - conta o n√∫mero de letras de "PALAVRA"
     """)
     print(message.chat.username)
     # Local de casa
@@ -43,8 +44,8 @@ Meus principais comandos s„o:
 # Top posters
 @bot.message_handler(commands=['assunto'])
 def quebragelo(message):
-    perguntas=['O que vocÍs est„o fazendo?', 'O que fizeram para matar o tÈdio?', 'Quais os melhores memes?', 'Qual o ˙ltimo filme que viram?',
-              'O que est„o pensando ?']
+    perguntas=['O que voc√™s est√£o fazendo?', 'O que fizeram para matar o t√©dio?', 'Quais os melhores memes?', 'Qual o √∫ltimo filme que viram?',
+              'O que est√£o pensando ?']
     escolhido=random.randint(0,len(perguntas))
     bot.reply_to(message, perguntas[escolhido])
     
@@ -54,7 +55,7 @@ def report(message):
     
 @bot.message_handler(commands=['cornos'])
 def cornos(message):
-    # ler os usu·rios no txt
+    # ler os usu√°rios no txt
     lista_usuarios = open("Usuarios.txt", "r", encoding="mac_roman").readlines()
     # remover repetidos
     lista_usuarios = list(dict.fromkeys(lista_usuarios))
@@ -65,12 +66,11 @@ def cornos(message):
 
     print(lista_usuarios[escolhido1] + lista_usuarios[escolhido2] + lista_usuarios[escolhido3])
     print((len(lista_usuarios)))
-    bot.reply_to(message, "Os mais cornos deste grupo s„o: {}{}{}\n".format(lista_usuarios[escolhido1],lista_usuarios[escolhido2],lista_usuarios[escolhido3]))
+    bot.reply_to(message, "Os mais cornos deste grupo s√£o: {}{}{}\n".format(lista_usuarios[escolhido1],lista_usuarios[escolhido2],lista_usuarios[escolhido3]))
         
 
-'''
 #Fonte 1
-@bot.message_handler(commands=['corona'])
+@bot.message_handler(commands=['covid'])
 def corona(message):
     link = "https://www.worldometers.info/coronavirus/country/brazil/"
     r  = requests.get(link)
@@ -85,7 +85,6 @@ Casos registrados: {}
 Mortes: {}
 Recuperados: {}
     """.format(casos[0], casos[1], casos[2]))
-'''
 
 
 @bot.message_handler(commands=['corona'])
@@ -133,7 +132,7 @@ def topmembers(message):
         print(string_edit)
         msg=msg+string_edit+'\n'
         i=i+1
-    bot.reply_to(message,"As pessoas mais desocupadas e procrastinadoras do grupo s„o: \n" + msg)
+    bot.reply_to(message,"As pessoas mais desocupadas e procrastinadoras do grupo s√£o: \n" + msg)
 '''
 
 @bot.message_handler(commands=['top'])
@@ -142,7 +141,7 @@ def topmembers(message):
     usersName=[]
     combinacao = []
     top=[]
-    # txt com todos usu·rios
+    # txt com todos usu√°rios
     usuarios = open("Usuarios.txt", "r", encoding="latin-1").readlines()
     # remover repetidos
     usuarios_unicos = list(dict.fromkeys(usuarios))
@@ -150,7 +149,7 @@ def topmembers(message):
     for item in usuarios:
         usersID.append(re.search('- (\d*)', item)[1])
         usersName.append(item[:item.find('-')])
-    # Combinacao È uma lista que contempla Nome-ID
+    # Combinacao √© uma lista que contempla Nome-ID
     combinacao.extend([list(i) for i in zip(usersName, usersID)])
     # Criar uma lista com todos usuarios
     correcao=''
@@ -162,7 +161,7 @@ def topmembers(message):
                 correcao=str(b[0])
                 top.append(str(combinacao[a][0]) + ' - mensagens: '+ str(b[1]))
                 
-    bot.reply_to(message,"As pessoas mais desocupadas e procrastinadoras do grupo s„o: \n{}\n{}\n{}\n{}\n{}".format(top[0],top[1],top[2],top[3],top[4]))
+    bot.reply_to(message,"As pessoas mais desocupadas e procrastinadoras do grupo s√£o: \n{}\n{}\n{}\n{}\n{}".format(top[0],top[1],top[2],top[3],top[4]))
 
 
 # Bottom posters
@@ -172,7 +171,7 @@ def downmembers(message):
     usersName=[]
     combinacao = []
     top=[]
-    # txt com todos usu·rios
+    # txt com todos usu√°rios
     usuarios = open("Usuarios.txt", "r", encoding="latin-1").readlines()
     # remover repetidos
     usuarios_unicos = list(dict.fromkeys(usuarios))
@@ -180,7 +179,7 @@ def downmembers(message):
     for item in usuarios:
         usersID.append(re.search('- (\d*)', item)[1])
         usersName.append(item[:item.find('-')])
-    # Combinacao È uma lista que contempla Nome-ID
+    # Combinacao √© uma lista que contempla Nome-ID
     combinacao.extend([list(i) for i in zip(usersName, usersID)])
     # Criar uma lista com todos usuarios
     correcao=''
@@ -192,7 +191,7 @@ def downmembers(message):
                 correcao=str(b[0])
                 top.append(str(combinacao[a][0]) + ' - mensagens: '+ str(b[1]))
                 
-    bot.reply_to(message,"Os lurkers do grupo s„o: \n{}\n{}\n{}\n{}\n{}".format(top[-1],top[-2],top[-3],top[-4],top[-5]))
+    bot.reply_to(message,"Os lurkers do grupo s√£o: \n{}\n{}\n{}\n{}\n{}".format(top[-1],top[-2],top[-3],top[-4],top[-5]))
     
 # All posters
 @bot.message_handler(commands=['todos'])
@@ -202,7 +201,7 @@ def total_msgs(message):
     username=[]
     combinacao = []
     top=[]
-    # txt com todos usu·rios
+    # txt com todos usu√°rios
     usuarios = open("Usuarios.txt", "r", encoding="latin-1").readlines()
     # remover repetidos
     usuarios_unicos = list(dict.fromkeys(usuarios))
@@ -212,7 +211,7 @@ def total_msgs(message):
         usersID.append(re.search('- (\d*)', item)[1])
         usersName.append(item[:item.find('-')])
         username.append(re.search('@(\w*)', item)[1])
-    # Combinacao È uma lista que contempla Nome-ID
+    # Combinacao √© uma lista que contempla Nome-ID
     combinacao.extend([list(i) for i in zip(usersName, usersID, username)])
     # Criar uma lista com todos usuarios
     correcao=''
@@ -228,7 +227,7 @@ def total_msgs(message):
 
     splitted_text = util.split_string('\n'.join(top), 3000)
     for text in splitted_text:
-        bot.reply_to(message,"N˙mero de mensagens por membro: \n" + text)
+        bot.reply_to(message,"N√∫mero de mensagens por membro: \n" + text)
 
 
     
@@ -236,21 +235,21 @@ def total_msgs(message):
 @bot.message_handler(commands=['universal'])
 @bot.message_handler(regexp="\w* universal \w*")
 def universal(message):
-    bot.reply_to(message, "AM…M IRM√OS! Eu era ex-viado, ex-prostituto, ex-cheirador de cola, ex-traficante, tinha apenas um rim e estava morrendo de AIDS, mas tudo isso mudou quando fui ungido pelo pastor na IGREJA UNIVERSAL. ")   
+    bot.reply_to(message, "AM√âM IRM√ÉOS! Eu era ex-viado, ex-prostituto, ex-cheirador de cola, ex-traficante, tinha apenas um rim e estava morrendo de AIDS, mas tudo isso mudou quando fui ungido pelo pastor na IGREJA UNIVERSAL. ")   
     
 # Handles all text messages that contains the commands '/start' or '/help'.
 @bot.message_handler(commands=['regras'])
 def regras(message):
     bot.reply_to(message, """REGRAS:
 - Sem flood de stickers/mensagens.
-- Sem racismo, machismo, homofobia ou qualquer discriminaÁ„o S…RIA (brincamos com isso desde que as pessoas se sintam confort·veis com a brincadeira e brinquem tambÈm, nada sÈrio ou pesado).
-- Sem brigas (sÛ de peixeira com hora marcada sem perder a amizade)
-- Sobre desabafos: vamos usar o bom senso quando alguÈm realmente estiver querendo desabafar ou querendo ajuda. Todos temos nossos momentos de bad, ent„o peÁo que se alguÈm quiser, deÍm o espaÁo para desabafar e ajudem.
-- Sem o compartilhamento de materiais de conte˙do sensÌvel (pornografia, violÍncia, etc)
+- Sem racismo, machismo, homofobia ou qualquer discrimina√ß√£o S√âRIA (brincamos com isso desde que as pessoas se sintam confort√°veis com a brincadeira e brinquem tamb√©m, nada s√©rio ou pesado).
+- Sem brigas (s√≥ de peixeira com hora marcada sem perder a amizade)
+- Sobre desabafos: vamos usar o bom senso quando algu√©m realmente estiver querendo desabafar ou querendo ajuda. Todos temos nossos momentos de bad, ent√£o pe√ßo que se algu√©m quiser, de√™m o espa√ßo para desabafar e ajudem.
+- Sem o compartilhamento de materiais de conte√∫do sens√≠vel (pornografia, viol√™ncia, etc)
 - Proibido falar mal da Greta Thunberg (s2)
-- Usu·rios com pÍnis > 15 cm ser„o banidos
-- D˙vidas, sugestıes ou correÁıes no bot falar com @luiseduardobr1
-- Qualquer problema sÛ avisar os Admins. Se divirtam!""")
+- Usu√°rios com p√™nis > 15 cm ser√£o banidos
+- D√∫vidas, sugest√µes ou corre√ß√µes no bot falar com @luiseduardobr1
+- Qualquer problema s√≥ avisar os Admins. Se divirtam!""")
     
 # Remove political post's
 @bot.message_handler(regexp="""\w*bolsonaro\w*|\w*Lula\w*|\w*dilma\w*|\w*guedes\w*|
@@ -260,9 +259,45 @@ def political_posts_remove(message):
     global count
     count=count+1
     if count>=5:
-        bot.send_message(message.chat.id, 'Por favor, sem discussıes polÌticas no grupo!')
+        bot.send_message(message.chat.id, 'Por favor, sem discuss√µes pol√≠ticas no grupo!')
         count=0
         
+# Handles all text messages that match the regular expression
+@bot.message_handler(regexp="Defina \w*")
+def definicao_informal(message):
+    # Receber a palavra a ser definida
+    manip_string = message.text
+    definicao = manip_string[manip_string.find(' ')+1:]
+    print(definicao)
+    #definicao = re.findall('Defina (\w*)', message.text)[0]
+    
+    try:
+
+        # Codigo-fonte dicionario informal
+        link = "https://www.dicionarioinformal.com.br/" + str(definicao)
+        response = requests.get(link)
+        html = response.text
+        soup = BeautifulSoup(html, "html.parser")
+
+        # Caso n√£o encontre a defini√ß√£o - mistyping
+        codigo = soup.find('div', {'class': 'col-xs-12 col-sm-6'})
+        if str(codigo.text.strip()) == 'Nenhuma Defini√ß√£o encontrada.':
+            erro = soup.find('div', {'class': 'di-blue-link'})
+            print(erro)
+            bot.reply_to(message, "Voc√™ n√£o quis dizer: \n" + str(erro.text.strip()))
+
+        # Caso encontre a defini√ß√£o
+        else:
+            bot.reply_to(message, str(soup.find('p', {'class': 'text-justify'}).text.strip())+'\n\n'+'Exemplo: ' + str(soup.find('blockquote', {'class': 'text-justify'}).text.strip()))
+    
+    except telebot.apihelper.ApiException:
+        splitted_text = util.split_string(str(soup.find('p', {'class': 'text-justify'}).text.strip())+'\n\n'+'Exemplo: ' + str(soup.find('blockquote', {'class': 'text-justify'}).text.strip()), 3000)
+        for text in splitted_text:
+            bot.reply_to(message, text)
+    
+    except AttributeError:
+          bot.reply_to(message, "Defini√ß√£o n√£o encontrada")
+    
 # Handles all text messages that match the regular expression
 @bot.message_handler(regexp="\w* prova \w*")
 def provas(message):
@@ -284,7 +319,7 @@ def gol(message):
 # Handles all text messages that match the regular expression
 @bot.message_handler(regexp="\w*elfo\w*")
 def elfo(message):
-    bot.reply_to(message, "N„o se pode confiar em elfos")
+    bot.reply_to(message, "N√£o se pode confiar em elfos")
     print(message.text)
 
 # Handles all text messages that match the regular expression
@@ -297,7 +332,7 @@ def areia(message):
 # Handles all text messages that match the regular expression
 @bot.message_handler(regexp="\w*comi o cu\w*")
 def comicu(message):
-    bot.reply_to(message, "CARALHO BRODER VOU TE CONTAR PUTA QUE PARIU EU TENTO CONVERSAR COM VOC  TER UM TEMPO OCIOSO DE RECREA«√O PRA DESCANSAR E TROCAR UM PAPO SABE IGUAL TODO AMIGO FAZ PRA RELAXAR UM POUCO DOS ESTRESSES DA VIDA E DA ROTINA MAS AÕ VOC  VEM TODA VEZ TODA VEZ PORRA E COME MEU CU PARA DE COMER MEU CU CARALHO EU S” TO TENTANDO TER UMA CONVERSA MADURA PARA DE COMER MEU CU TODA VEZ EU VOU LER SUA MENSAGEM ACHANDO QUE … UM COMENT¡RIO INTELIGENTE QUE VAI REPERCUTIR NO MEU DIA-A-DIA MAS … S” VOC  COMENDO MEU CU ISSO TEM QUE PARAR BRODER POR FAVOR")
+    bot.reply_to(message, "CARALHO BRODER VOU TE CONTAR PUTA QUE PARIU EU TENTO CONVERSAR COM VOC√ä TER UM TEMPO OCIOSO DE RECREA√á√ÉO PRA DESCANSAR E TROCAR UM PAPO SABE IGUAL TODO AMIGO FAZ PRA RELAXAR UM POUCO DOS ESTRESSES DA VIDA E DA ROTINA MAS A√ç VOC√ä VEM TODA VEZ TODA VEZ PORRA E COME MEU CU PARA DE COMER MEU CU CARALHO EU S√ì TO TENTANDO TER UMA CONVERSA MADURA PARA DE COMER MEU CU TODA VEZ EU VOU LER SUA MENSAGEM ACHANDO QUE √â UM COMENT√ÅRIO INTELIGENTE QUE VAI REPERCUTIR NO MEU DIA-A-DIA MAS √â S√ì VOC√ä COMENDO MEU CU ISSO TEM QUE PARAR BRODER POR FAVOR")
         
 # Dom Pedro II
 @bot.message_handler(regexp="""\w*Dom Pedro II\w*""")
@@ -312,7 +347,7 @@ def contadora(message):
         frase = message.text
         palavra = re.findall('Contar letras (\w*)', frase)[0]
         print(list(palavra))
-        bot.reply_to(message, "N˙mero de letras: " + str(len(list(palavra))))
+        bot.reply_to(message, "N√∫mero de letras: " + str(len(list(palavra))))
     except:
         pass
     
@@ -320,19 +355,19 @@ def contadora(message):
 @bot.message_handler(commands=['bomdia','boatarde','boanoite'])
 def bomdiaboatardeboanoite(message):
     #bot.delete_message(message.chat.id, message.message_id)
-    bot.send_message(message.chat.id, 'Merm„o bom dia È o caralho parcero, isso aqui È o grupo da torcida jovem, entendeu? Tu quer dar bom dia tu cria um grupo de viado, de GLS, e fica "bom dia", "boa tarde", "boa noite", ou ent„o tu cria um grupo pra tua famÌlia, aÌ tu fica dando bom dia. Aqui È psicopata, ladr„o, bandido, cheirador, vendedor de droga, polÌcia maluco, polÌcia assaltante, aqui tem a porra toda merm„o, isso aqui È a Torcida Jovem do Reddit! Bom dia È o caralho, rap·! Toma no cu...')
+    bot.send_message(message.chat.id, 'Merm√£o bom dia √© o caralho parcero, isso aqui √© o grupo da torcida jovem, entendeu? Tu quer dar bom dia tu cria um grupo de viado, de GLS, e fica "bom dia", "boa tarde", "boa noite", ou ent√£o tu cria um grupo pra tua fam√≠lia, a√≠ tu fica dando bom dia. Aqui √© psicopata, ladr√£o, bandido, cheirador, vendedor de droga, pol√≠cia maluco, pol√≠cia assaltante, aqui tem a porra toda merm√£o, isso aqui √© a Torcida Jovem do Reddit! Bom dia √© o caralho, rap√°! Toma no cu...')
     
 # trabalho bot
-@bot.message_handler(regexp="""\w*n„o trabalham\w*|\w*nao trabalham\w*|\w*nao trabalha\w*""")
+@bot.message_handler(regexp="""\w*n√£o trabalham\w*|\w*nao trabalham\w*|\w*nao trabalha\w*""")
 def trabalho(message):
     #bot.delete_message(message.chat.id, message.message_id)
-    bot.send_message(message.chat.id, 'Qual È? Que manÈ...vai me dar trabalho por acaso?')
+    bot.send_message(message.chat.id, 'Qual √©? Que man√©...vai me dar trabalho por acaso?')
     
 # bot fdp
 #@bot.message_handler(regexp="""\w*bot fdp\w*|\w*bot filha\w*|\w*bot filho\w*""")
 #def trabalho(message):
     #bot.delete_message(message.chat.id, message.message_id)
-#    bot.send_message(message.chat.id, """Mas que porra È essa que vocÍ falou sobre mim, seu arrombado? Fique sabendo que eu me formei com honra no ExÈrcito Brasileiro, e estive envolvido em diversos ataques secretos ao Comando Vermelho, e tenho mais de 300 mortes confirmadas. N„o sÛ sou treinado em t·ticas de gorila como tambÈm sou o melhor sniper em todo o BOPE. Pra mim vocÍ num passa de mais um alvo. Vou comer esse seu cuzinho com uma precis„o nunca antes vista nesse planeta, marque minhas palavras, parÁa. VocÍ pensa que pode sair por aÌ falando merda na Internet? Pense de novo, cuz„o. Enquanto vocÍ lÍ isso eu tÙ falando com minha rede secreta de espiıes espalhados pelo Brasil e seu IP est· sendo localizado ent„o melhor se preparar pra treta, viado. A treta que vai acabar com essa bosta patÈtica que vicÍ chama de vida. VocÍ t· morto, moleque. Posso estar em qualquer lugar, a qualquer hora, e posso te matar de setecentas maneiras diferentes, e isso sÛ com minhas prÛprias m„os. N„o sÛ eu sou treinado em capoeira e jiu jitsu brasileiro, como tambÈm tenho acesso a todo o arsenal da Marinha Brasileira e vou usar isso tudo pra expulsar esse seu cu da face do continente, seu merdinha. Se tu soubesse a maldiÁ„o que seu coment·rio ìespertoî traria sobre vocÍ, talvez vocÍ tivesse calado tua boca. Mas n„o, vocÍ n„o fechou o bico, e vai pagar por isso, seu idiota do caralho. Vou cagar f˙ria em cima de vocÍ atÈ tu se afogar. VocÍ t· fudido, moleque.""")
+#    bot.send_message(message.chat.id, """Mas que porra √© essa que voc√™ falou sobre mim, seu arrombado? Fique sabendo que eu me formei com honra no Ex√©rcito Brasileiro, e estive envolvido em diversos ataques secretos ao Comando Vermelho, e tenho mais de 300 mortes confirmadas. N√£o s√≥ sou treinado em t√°ticas de gorila como tamb√©m sou o melhor sniper em todo o BOPE. Pra mim voc√™ num passa de mais um alvo. Vou comer esse seu cuzinho com uma precis√£o nunca antes vista nesse planeta, marque minhas palavras, par√ßa. Voc√™ pensa que pode sair por a√≠ falando merda na Internet? Pense de novo, cuz√£o. Enquanto voc√™ l√™ isso eu t√¥ falando com minha rede secreta de espi√µes espalhados pelo Brasil e seu IP est√° sendo localizado ent√£o melhor se preparar pra treta, viado. A treta que vai acabar com essa bosta pat√©tica que vic√™ chama de vida. Voc√™ t√° morto, moleque. Posso estar em qualquer lugar, a qualquer hora, e posso te matar de setecentas maneiras diferentes, e isso s√≥ com minhas pr√≥prias m√£os. N√£o s√≥ eu sou treinado em capoeira e jiu jitsu brasileiro, como tamb√©m tenho acesso a todo o arsenal da Marinha Brasileira e vou usar isso tudo pra expulsar esse seu cu da face do continente, seu merdinha. Se tu soubesse a maldi√ß√£o que seu coment√°rio ¬ìesperto¬î traria sobre voc√™, talvez voc√™ tivesse calado tua boca. Mas n√£o, voc√™ n√£o fechou o bico, e vai pagar por isso, seu idiota do caralho. Vou cagar f√∫ria em cima de voc√™ at√© tu se afogar. Voc√™ t√° fudido, moleque.""")
     
 @bot.message_handler(func=lambda msg: msg.text in ['Good bot', 'good bot', 'Good fucking bot'])
 def goodbot(message):
@@ -421,9 +456,9 @@ def memberid(message):
 # New group member
 @bot.message_handler(func=lambda m: True, content_types=['new_chat_members'])
 def new_member(message):
-    bot.reply_to(message, 'Bem vindo, ' + str(message.new_chat_member.first_name) + '! J· deu o cu ?')
+    bot.reply_to(message, 'Bem vindo, ' + str(message.new_chat_member.first_name) + '! J√° deu o cu ?')
     regras(message)
-    print('ol· '+str(message.new_chat_member.username))
+    print('ol√° '+str(message.new_chat_member.username))
     #bot.kick_chat_member(message.chat.id, message.new_chat_member.id, None)
 
 # Removed group member
@@ -434,8 +469,8 @@ def remove_member(message):
     
 
 # Send my curriculum
-#@bot.message_handler(func=lambda msg: msg.text == 'meu curriculo' or msg.text == 'meu currÌculo' or msg.text == 'currÌculo' or msg.text == 'curriculo')
-@bot.message_handler(func=lambda msg: msg.text in ['currÌculo', 'meu currÌculo', 'curriculo','meu curriculo'])
+#@bot.message_handler(func=lambda msg: msg.text == 'meu curriculo' or msg.text == 'meu curr√≠culo' or msg.text == 'curr√≠culo' or msg.text == 'curriculo')
+@bot.message_handler(func=lambda msg: msg.text in ['curr√≠culo', 'meu curr√≠culo', 'curriculo','meu curriculo'])
 def curriculo(message):
     #doc = open('curriculo_luiseduardopompeu.pdf', 'rb')
     #bot.send_document(message.chat.id, doc)
@@ -445,7 +480,7 @@ def curriculo(message):
 @bot.inline_handler(lambda query: query.query == 'text')
 def query_text(inline_query):
     try:
-        r = types.InlineQueryResultArticle('1', 'Manh„', types.InputTextMessageContent('Bom dia!'))
+        r = types.InlineQueryResultArticle('1', 'Manh√£', types.InputTextMessageContent('Bom dia!'))
         r2 = types.InlineQueryResultArticle('2', 'Tarde', types.InputTextMessageContent('Boa tarde!'))
         r3 = types.InlineQueryResultArticle('3', 'Noite', types.InputTextMessageContent('Boa noite!'))
         bot.answer_inline_query(inline_query.id, [r, r2, r3], cache_time=1)
@@ -471,7 +506,7 @@ def query_photo(inline_query):
 @bot.inline_handler(lambda query: len(query.query) == 0)
 def default_query(inline_query):
     try:
-        r = types.InlineQueryResultArticle('1', 'J· Deram o Cu Hoje', types.InputTextMessageContent('J· Deram o Cu hoje?'))
+        r = types.InlineQueryResultArticle('1', 'J√° Deram o Cu Hoje', types.InputTextMessageContent('J√° Deram o Cu hoje?'))
         bot.answer_inline_query(inline_query.id, [r])
     except Exception as e:
         print(e)
