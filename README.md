@@ -1,7 +1,7 @@
 # TelegramBOT
-Tutorial rápido de como fazer um bot para telegram.
+Tutorial "rápido" de como fazer um bot para telegram.
 
-# Primeiros passos
+## Primeiros passos
 1) Com o telegram aberto na sua conta, procure pelo "usuário" [@BotFather](https://core.telegram.org/bots#6-botfather) e digite **/newbot** para criar um novo bot de telegram.
 
 ![image](https://user-images.githubusercontent.com/56649205/77024513-80b63d00-696d-11ea-815a-67634e1a49df.png) 
@@ -35,7 +35,7 @@ Após essas etapas, a configuração básica do bot já está concluída. No ent
 /deletegame — delete an existing game.
 ```
 
-# Programando o Bot
+## Programando o Bot
 Em python, há algumas bibliotecas que permitem ao usuário codificar o bot a partir das instruções disponíveis na [API do telegram](https://core.telegram.org/bots/api). Neste tutorial, decidiu-se utilizar a biblioteca [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) sendo uma das mais simples de implementar e ao mesmo tempo bastante completa. 
 
 Para instalar no Jupyter Notebook basta escrever na célula:
@@ -129,7 +129,7 @@ left_chat_member, new_chat_title, new_chat_photo, delete_chat_photo, group_chat_
 supergroup_chat_created, channel_chat_created, migrate_to_chat_id, migrate_from_chat_id, pinned_message
 ```
 
-# Executando
+## Executando
 Para iniciar o bot, é preciso que no final do código tenha a linha:
 
 ```Python
@@ -171,4 +171,22 @@ Para um [grupo de amizade do reddit brasil](https://t.me/joinchat/NLSAqhl4ZdiubH
 
 Para mais exemplos, pode-se estudar pelos disponíveis da página da biblioteca utilizada: [examples](https://github.com/eternnoir/pyTelegramBotAPI/tree/master/examples). 
 
-# Funções e atributos adicionais
+## Funções e atributos adicionais
+
+## Deploy do script 
+Obviamente, o bot só funciona enquanto está sendo executado. Para manter sua operação sem precisar do computador ligado ininterruptamente, há diversas soluções possíveis:
+
+### Rodando no Android
+É possível rodar scripts em python no celular com sistema android. Para isso, recomendo o aplicativo **Pydroid** que já testei e cumpre bem sua função, sendo bem fácil de configurar/utilizar. 
+
+### Raspberry Pi
+Essa é uma recomendação clássica em fóruns de internet uma vez que o consumo de energia elétrica para operação de um microcontrolador é baixa, permitindo rodar scripts sem sobrecarregar seu aparelho celular ou manter o computador ligado ininterruptamente. 
+
+### Servidores
+Na internet, é possível encontrar diversos sites que oferecem uma máquina virtual ou um espaço no servidor para executar de forma *praticamente* ininterrupta códigos nas mais diversas linguagens de programação. No entanto, a maioria dos serviços gratuitos têm algumas regras que dificultam ou inviabilizam certas funções no bot, irei destacar isso em cada caso:
+
+#### PythonAnywhere
+O [PythonAnywhere](https://www.pythonanywhere.com/) te oferece uma máquina virtual gratuitamente que você pode hospedar seus scripts e rodá-los remotamente. De longe, é o sistema mais fácil de configurar. Você pode escrever seu bot em sua máquina e depois fazer upload para o site. Em seguida, basta executá-lo no *Bash Console* com o comando: `python3.8 meuscript.py` (3.8 é a versão do python que escolhi, mas pode ser outra). Pronto ! Seu script já está em execução. Caso queira instalar alguma biblioteca nova basta escrever `pip3.8 install --user BIBLIOTECA`.
+
+![image](https://user-images.githubusercontent.com/56649205/81192043-21999f80-8f90-11ea-9d36-c293518c3595.png)
+
