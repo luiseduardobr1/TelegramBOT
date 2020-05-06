@@ -199,3 +199,23 @@ O [PythonAnywhere](https://www.pythonanywhere.com/) te oferece uma máquina virt
 
 ![image](https://user-images.githubusercontent.com/56649205/81192043-21999f80-8f90-11ea-9d36-c293518c3595.png)
 
+
+#### Heroku
+Na minha opinião, dentre os servidores gratuitos, este é o melhor para hospedar um bot. No entanto, é um pouco complicado para configurar na primeira utilização. Tentarei explicar de forma bem breve para o SO Windows, mas a informação completa está disponível no [site](https://devcenter.heroku.com/articles/getting-started-with-python). 
+
+1) Baixe e instale [Git](https://git-scm.com/download/win) e [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+
+2) Crie uma pasta e coloque o script em python que vc quer enviar ao servidor (*deploy*). 
+
+3) Na mesma pasta do item (2), coloque um arquivo de texto *requirements.txt* em que nele deve constar todas as bibliotecas "de terceiros" que devem ser instaladas no servidor do heroku. Para saber a versão da biblioteca utilizada, utilize o comando `pip freeze` no console da sua instalação python. 
+
+Como exemplo de um bot que criei constava as seguintes bibliotecas no arquivo *requirements.txt*:
+```
+pyTelegramBotAPI==3.6.7
+bs4==0.0.1
+requests==2.22.0
+requests-html==0.10.0
+pytz==2019.3
+python-dateutil==2.8.1
+pandas==1.0.1
+```
