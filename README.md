@@ -229,3 +229,15 @@ No meu bot, o arquivo *Procfile* era:
 5) Com os três arquivos na pasta, entre no site do [Heroku](http://heroku.com/), se registre e acesse sua *dashboard*, como mostrado na figura abaixo: 
 
 ![image](https://user-images.githubusercontent.com/56649205/81196149-0f6e3000-8f95-11ea-83f7-3f56042e92a5.png)
+
+Clique em *New*, depois *Create new app*. Digite um nome qualquer para seu app e depois clique em *Create app*. Com a página do seu aplicativo já criada é preciso fazer o *deploy* do seu script python. 
+
+6) Abra o prompt de comando do windows (cmd) e vá para a pasta correspondente do seu bot. No meu caso:
+```
+Microsoft Windows [versão 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\luis>cd desktop/bot
+
+C:\Users\luis\Desktop\Bot>
+```
