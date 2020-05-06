@@ -188,5 +188,14 @@ Na internet, é possível encontrar diversos sites que oferecem uma máquina vir
 #### PythonAnywhere
 O [PythonAnywhere](https://www.pythonanywhere.com/) te oferece uma máquina virtual gratuitamente que você pode hospedar seus scripts e rodá-los remotamente. De longe, é o sistema mais fácil de configurar. Você pode escrever seu bot em sua máquina e depois fazer upload para o site. Em seguida, basta executá-lo no *Bash Console* com o comando: `python3.8 meuscript.py` (3.8 é a versão do python que escolhi, mas pode ser outra). Pronto ! Seu script já está em execução. Caso queira instalar alguma biblioteca nova basta escrever `pip3.8 install --user BIBLIOTECA`.
 
+**Vantagens:**
+* Fácil usar e configurar
+* Suporte rápido e eficiente no [fórum de discussão](https://www.pythonanywhere.com/forums/)
+
+**Desvantagens**
+* É comum o sistema ser reiniciado e o bot ficar fora do ar. Para minimizar esse problema, é possível configurar o *Scheduled tasks* na aba *Tasks* para inicializá-lo, caso esteja fora do ar, diariamente em um horário específico.
+* Após alguns dias, é possível atingir o limite de utilização do site na conta gratuita o que, como consequência, reduz a velocidade de processamento do seu script, deixando-o lento. 
+* Caso o script tente acessar algum site que não esteja na [whitelist](https://www.pythonanywhere.com/whitelist/), este será bloqueado para a conta gratuita. De longe, este foi o principal motivo de eu evitar utilizar o python anywhere.  
+
 ![image](https://user-images.githubusercontent.com/56649205/81192043-21999f80-8f90-11ea-9d36-c293518c3595.png)
 
