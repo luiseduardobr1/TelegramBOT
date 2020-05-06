@@ -268,3 +268,14 @@ heroku logs --tail
 ```
 
 10) Pronto ! Seu script já está rodando no heroku. 
+
+**Vantagens:**
+* As limitações de CPU são menos rígidas que do pythonanywhere
+* O script é reiniciado automaticamente em caso de erro ou atualização dos servidores
+* Em uma conta gratuita pode-se rodar até 5 aplicativos simultaneamente
+* Não há restrições (pelo menos enquanto testei) para requisições em outros sites, útil em aplicativos de *web-scraping*. 
+
+**Desvantagens:**
+* Complexidade
+* Cota mensal de processamento limitado em conta gratuita sem registro de cartão de crédito. Após essa cota, as aplicações são temporariamente suspensas até final do mês. 
+
