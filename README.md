@@ -219,3 +219,13 @@ pytz==2019.3
 python-dateutil==2.8.1
 pandas==1.0.1
 ```
+
+4) Ainda na mesma pasta, coloque um arquivo chamado *Procfile* (**sem extensão**) que será responsável por enviar ao servidor o comando que deverá ser utilizado ao executar o script. 
+
+No meu bot, o arquivo *Procfile* era:
+
+`worker: python bot.py`
+
+5) Com os três arquivos na pasta, entre no site do [Heroku](http://heroku.com/), se registre e acesse sua *dashboard*, como mostrado na figura abaixo: 
+
+![image](https://user-images.githubusercontent.com/56649205/81196149-0f6e3000-8f95-11ea-83f7-3f56042e92a5.png)
