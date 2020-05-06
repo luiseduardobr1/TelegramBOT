@@ -241,3 +241,30 @@ C:\Users\luis>cd desktop/bot
 
 C:\Users\luis\Desktop\Bot>
 ```
+
+7) Em seguida, digite e dê enter:
+
+`heroku login`
+
+Irá abrir uma página em seu navegador, clique no botão que aparecer e depois volte para o prompt de comando. 
+
+8) Se for a primeira vez que utiliza o heroku digite os seguintes comandos e dê enter:
+```
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+onde tem as aspas bote seu email e nome. Se deixar como já está escrito também funcionará. 
+
+9) Em seguida vá digitando os seguintes comandos, substituindo o que tem escrito em maiúsculo e dando enter:
+```
+git add .
+git commit -m "QUALQUER NOME QUE QUISER"
+git push heroku master
+heroku ps:scale worker=1 -a NOMEDOAPLICATIVO
+```
+Ao final, você já estará executando seu script caso tudo tenha ocorrido corretamente. Para conferir os logs e checar se tudo está coerente digite ao final:
+```
+heroku logs --tail 
+```
+
+10) Pronto ! Seu script já está rodando no heroku. 
