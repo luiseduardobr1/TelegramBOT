@@ -1,6 +1,4 @@
-﻿# coding: latin-1
-
-import telebot
+﻿import telebot
 from telebot import types
 import collections
 import re
@@ -12,13 +10,17 @@ from datetime import datetime
 from dateutil import tz
 from telebot import util
 import pandas as pd
+import string
+import hashlib
+import unicodedata
 
-bot = telebot.TeleBot("TOKEN")
+bot = telebot.TeleBot("YOUR TOKEN HERE")
 
 updates = bot.get_updates()
 
 user_dic={}
 count=0
+partida_forca=0
 
 # Site with updates: https://api.telegram.org/bot1103293989:AAGrwpn7YoZVIPiPUXaFxdYWHJX2wMRGvn4/getUpdates
 
@@ -42,6 +44,124 @@ Meus principais comandos são:
     print(message.chat.username)
     # Local de casa
     #bot.send_location(message.chat.id, lat, long)
+
+
+
+# Remove acentuação e passa para minuscula
+def strip_accents(text):
+
+    try:
+        text = unicode(text, 'utf-8')
+    except NameError: # unicode is a default on python 3
+        pass
+
+    text = unicodedata.normalize('NFD', text)\
+           .encode('ascii', 'ignore')\
+           .decode("utf-8")
+
+    return str(text).lower()
+
+
+class PyEncryption:
+    def __init__(self, texto):
+        self.texto = texto
+
+    def asc2(self, modo, shift):
+        # Encrypt
+        if modo==0:
+            encriptar = ''
+            for caractere in list(self.texto):
+                valor = '{0:02x}'.format(ord(caractere)+shift)
+                encriptar = encriptar + valor
+            return(encriptar)
+
+        # Decrypt
+        if modo==1:
+            decriptar = ''
+            caracteres = re.findall('..',self.texto)
+            for caracter in caracteres:
+                print(caracter)
+                convertido = int(caracter, 16)
+                convertido = convertido-shift
+                decriptar = decriptar + chr(convertido)
+            return(decriptar)
+
+
+    def base_n(self, num, b, numerals="0123456789abcdefghijklmnopqrstuvwxyz"):
+        return ((num == 0) and numerals[0]) or (self.base_n(num // b, b, numerals).lstrip(numerals[0]) + numerals[num % b])
+
+
+    def baseN_shifted(self, base, modo, shift, bits):
+
+        caracteres_possiveis = [' ', '.', ',', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_',
+                               '@','#','-','/','\\', ':', '!', '?']
+
+        # Encrypt
+        if modo==0:
+            encriptar = ''
+            for caractere in list(self.texto):
+
+                if caractere not in caracteres_possiveis:
+                    valor = self.base_n(string.ascii_lowercase.index(caractere) + shift, base)
+                    diff_bits = bits - len(valor)
+                    if diff_bits != 0:
+                        valor = '0'*diff_bits + valor
+                    encriptar = encriptar + valor
+
+                else:
+                    valor =  self.base_n(int(caracteres_possiveis.index(caractere))+shift+26, base)
+                    diff_bits = bits - len(valor)
+                    if diff_bits != 0:
+                        valor = '0'*diff_bits + valor
+                    encriptar = encriptar  + valor
+
+            return(encriptar)
+
+        # Decrypt
+        if modo==1:
+            decriptar = ''
+            caracteres = re.findall('.'*bits,self.texto)
+            for caracter in caracteres:
+                convertido = int(caracter, base)
+                if convertido-shift >= 26:
+                    decriptar = decriptar + caracteres_possiveis[convertido-26-shift]
+                else:
+                    decriptar = decriptar + string.ascii_lowercase[convertido-shift]
+
+            return(decriptar)
+
+
+    def asc2_baseN(self, base, modo, shift):
+        if modo==0:
+            self.texto = self.asc2(modo, shift)
+            return(self.base_n(int(self.texto, 16), base))
+        if modo==1:
+            base16 = int(self.texto, base)
+            self.texto = '{0:02x}'.format(base16)
+            self.texto = self.asc2(modo, shift)
+            return(self.texto)
+
+
+
+@bot.message_handler(commands=['code'])
+def code_message(message):
+
+    # Texto a ser codificado
+    escolha = re.findall('/code (.*)', message.text)
+    if len(escolha) >= 1:
+        msg_cod = PyEncryption(escolha[0]).asc2_baseN(32, 0, 3)
+        bot.reply_to(message, msg_cod)
+
+
+@bot.message_handler(commands=['decode'])
+def decode_message(message):
+
+    # Texto a ser codificado
+    escolha = re.findall('/decode (.*)', message.text)
+    if len(escolha) >= 1:
+        msg_cod = PyEncryption(escolha[0]).asc2_baseN(32, 1, 3)
+        bot.reply_to(message, msg_cod)
+
 
 
 @bot.message_handler(commands=['forca'])
@@ -120,24 +240,27 @@ def forca_partida(message):
         rodadas = 1
 
         # Base de dados de palavras
-        df = pd.read_csv('forca_palavras.csv', header=None, encoding='latin-1')
+        df = pd.read_csv('forca_palavras2.csv', header=None, encoding='latin-1')
 
         # Palavra escolhida
         randomico = random.randint(0, len(df) - 1)
-        palavra_escolhida = df.iloc[randomico][0]
+        palavra_escolhida = strip_accents(df.iloc[randomico][0])
         dica = df.iloc[randomico][1]
 
         # Gabarito
         print(palavra_escolhida)
 
         # Palavra a ser revelada
-        palavra_atualizada = [' _ ' for i in list(palavra_escolhida)]
+        palavra_atualizada = [' _ ' if i not in [' ',',','.','-','_'] else ' '+i+' ' for i in list(palavra_escolhida)]
         bot.reply_to(message, ''.join(palavra_atualizada) + '\n' + 'DICA: ' + dica)
 
         # Partida em andamento
         partida_forca=1
 
     else:
+
+        # Função para converter em minuscula e sem acentuacao
+        message.text = strip_accents(message.text)
 
         # Pegar letra soletrada
         escolha = re.findall('/forca (.*)', message.text)
