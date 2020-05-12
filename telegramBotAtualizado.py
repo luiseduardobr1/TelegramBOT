@@ -22,8 +22,6 @@ user_dic={}
 count=0
 partida_forca=0
 
-# Site with updates: https://api.telegram.org/bot1103293989:AAGrwpn7YoZVIPiPUXaFxdYWHJX2wMRGvn4/getUpdates
-
 # Handles all text messages that contains the commands '/start' or '/help'.
 @bot.message_handler(commands=['start','comandos'])
 def handle_start(message):
